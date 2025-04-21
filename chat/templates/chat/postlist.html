@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Posts in {{ category.name }}</h2>
+<ul>
+    {% for post in posts %}
+    <li>{{ post.title }}</li>
+    {% empty %}
+    <li>No posts available for this category.</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
