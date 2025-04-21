@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
-    title = models.CharField(max_length=30, unique=True)
+    title = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     image = models.ImageField(
         upload_to="category-images/", default="category-images/no-image.jpg"

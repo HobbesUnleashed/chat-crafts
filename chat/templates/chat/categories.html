@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for category in object_list %}
+        <div class="col-12 col-md-4 d-flex justify-content-center mt-3">
+            <div class="card" style="width: 100%;">
+                <div class="card-body text-center">
+                    <div class="image-container">
+                        <div class="image-flash">
+                            <p class="cat_name">{{ category.title }}</p>
+                        </div>
+                        {% if category.image %}
+                        <a href="{% url 'posts_list' category.id %}">
+                            <img src="{{ category.image.url }}" alt="{{ category.title }}" class="img-fluid fixed-size">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'posts_list' category.id %}">
+                            <img src="category-images/no_image.jpg" alt="Default Image" class="img-fluid">
+                        </a>
+                        {% endif %}
+                        <hr>
+                        <p class="card-text text-muted h6">{{ category.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

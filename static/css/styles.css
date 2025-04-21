@@ -1,0 +1,36 @@
+/* Colors */
+.standard {
+    color: #000;
+}
+
+.poppy {
+    color: #ed4e60;
+}
+
+.melon {
+    color: #e94d88;
+
+}
+
+.mango {
+    color: #fbb038;
+}
+
+.grannyApple {
+    color: #a3c149;
+}
+
+.pacific {
+    color: #0081bc;
+}
+
+.main-bg {
+    background-color: #e6e7e8;
+}
+
+/* Image size for tiles */
+.fixed-size {
+    width: 75%;
+    height:250px;
+    object-fit: cover;
+} 
