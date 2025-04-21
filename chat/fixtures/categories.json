@@ -1,0 +1,56 @@
+[
+    {
+        "model": "chat.Category",
+        "pk": 1,
+        "fields": {
+            "title": "Cards",
+            "description": "Handmade and decorative cards for all occasions.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\cards.jpg"
+        }
+    },
+    {
+        "model": "chat.Category",
+        "pk": 2,
+        "fields": {
+            "title": "Scrapbooking",
+            "description": "Creating memory pages using photos, stickers, and embellishments.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\scrapbooking.jpg"
+        }
+    },
+    {
+        "model": "chat.Category",
+        "pk": 3,
+        "fields": {
+            "title": "Stamps",
+            "description": "Rubber or clear stamps for crafting and decorating projects.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\stamps.jpg"
+        }
+    },
+    {
+        "model": "chat.Category",
+        "pk": 4,
+        "fields": {
+            "title": "Dies",
+            "description": "Metal cutting dies used for precise paper crafting.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\dies.jpg"
+        }
+    },
+    {
+        "model": "chat.Category",
+        "pk": 5,
+        "fields": {
+            "title": "Equipment",
+            "description": "Tools and machines for crafting, such as embossing folders and cutting machines.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\equipment.jpg"
+        }
+    },
+    {
+        "model": "chat.Category",
+        "pk": 6,
+        "fields": {
+            "title": "Other Crafts",
+            "description": "Miscellaneous crafting supplies and creative activities.",
+            "image": "C:\\Users\\sleac\\OneDrive\\Desktop\\chat-crafts\\static\\images\\other_crafts.jpg"
+        }
+    }
+]

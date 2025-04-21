@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     ".herokuapp.com",
@@ -146,7 +146,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Media upload handlers
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 

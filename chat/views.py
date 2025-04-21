@@ -12,14 +12,18 @@ class Categories(generic.ListView):
 
 class PostList(ListView):
     model = Post
-    template_name = "crafts/postlist.html"
+    template_name = "chat/postlist.html"
     context_object_name = "posts"
     paginate_by = 6
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        category_id = self.request.resolver_match.kwargs.get(
-            "category_id"
-        )  # Fetch category_id directly from URL
-        context["category"] = get_object_or_404(Category, pk=category_id)
+    def get_queryset(self):
+        """Filters posts by the chosen category"""
+        category_id = self.kwargs["category_id"]  # Extract category_id from URL
+        category = get_object_or_404(Category, pk=category_id)
+        return Post.objects.filter(category=category).order_by("-created_on")
+
+    def get_context_data(self, **kwargs):
+        """Adds category data to context"""
+        context = super().get_context_data(**kwargs)
+        context["category"] = get_object_or_404(Category, pk=self.kwargs["category_id"])
         return context
