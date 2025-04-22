@@ -4,6 +4,8 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 
+{% load static %}
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -65,8 +67,13 @@
                     {% endif %}
                 </ul>
                 <span class="navbar-text text-muted">
-                    Your one stop shop for all craft discussions
+                    <p>
+                        Your one stop shop for all craft discussions
                 </span>
+                {% block create %}
+
+                {% endblock create %}
+                </p>
             </div>
         </div>
     </nav>

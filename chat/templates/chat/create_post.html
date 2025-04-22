@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+<!-- chat/templates/create_post.html -->
+<h1>This is create_post.html</h1>
+
+{% block content %}
+<form method="post" action="{% url 'create_post_page' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}

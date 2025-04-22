@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.Categories.as_view(), name="home"),
+    path("create-post/", views.create_post_page, name="create_post_page"),
     path("posts/<int:category_id>/", views.PostList.as_view(), name="posts_list"),
 ]
