@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
+    <div class="row text-white">
         <h2>Posts in {{ category.title }}</h2>
         {% for post in posts %}
         <div class="col-12 col-md-4 d-flex justify-content-center mt-3">
@@ -30,6 +30,20 @@
         </div>
         {% endfor %}
     </div>
+    <div class="mb-5"></div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT
+                    &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </div>
 
 

@@ -24,8 +24,12 @@
     color: #0081bc;
 }
 
+.white {
+    color: #fff;
+}
+
 .main-bg {
-    background-color: #e6e7e8;
+    background-color: #322d31;
 }
 
 /* Image size for tiles */
