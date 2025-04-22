@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import strip_tags
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    image = models.ImageField(
-        upload_to="category-images/", default="category-images/no-image.jpg"
-    )
+    image = CloudinaryField("image")
 
     class Meta:
         ordering = ["id"]
