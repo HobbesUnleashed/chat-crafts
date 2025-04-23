@@ -1,18 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views import generic
+from django.urls import reverse
 from django.views.generic import ListView
-from .models import Category, Post
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm, CommentForm
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from .models import Category, Post, Comment
+from .forms import PostForm, CommentForm
 
 
-# Create your views here.
-class Categories(generic.ListView):
-    queryset = Category.objects.all()
+# Categories List View
+class Categories(ListView):
+    model = Category
     template_name = "chat/categories.html"
+    context_object_name = "categories"
 
 
+# Post List View (Filtered by Category)
 class PostList(ListView):
     model = Post
     template_name = "chat/postlist.html"
@@ -20,51 +23,50 @@ class PostList(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        """Filters posts by the chosen category"""
-        category_id = self.kwargs["category_id"]  # Extract category_id from URL
+        """Filters posts by the chosen category."""
+        category_id = self.kwargs.get("category_id")
         category = get_object_or_404(Category, pk=category_id)
         return Post.objects.filter(category=category).order_by("-created_on")
 
     def get_context_data(self, **kwargs):
-        """Adds category data to context"""
+        """Adds category data to context."""
         context = super().get_context_data(**kwargs)
-        context["category"] = get_object_or_404(Category, pk=self.kwargs["category_id"])
+        context["category"] = get_object_or_404(
+            Category, pk=self.kwargs.get("category_id")
+        )
         return context
 
 
+# Post Detail View
 def post_detail(request, post_id):
-    """
-    Display an individual :model: `blog.post`
+    """Display an individual post and its comments."""
+    post = get_object_or_404(Post, pk=post_id)
 
-    **Context**
+    # Combine approved comments for all users and unapproved comments for the logged-in user
+    if request.user.is_authenticated:
+        comments = post.comments.filter(approved=True) | post.comments.filter(
+            author=request.user, approved=False
+        )
+    else:
+        comments = post.comments.filter(approved=True)
 
-    ``post``
-        An instance of :model: `blog.post`.
-
-    **Template:**
-
-    :template: `blog/post_detail.html`
-    """
-
-    post = get_object_or_404(Post, id=post_id)
-    comments = post.comments.all().order_by("-created_on")
+    # Ensure the comments are ordered by created date
+    comments = comments.order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
 
     if request.method == "POST":
-        print("Received a POST request")
-        comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
             comment.post = post
             comment.save()
-            messages.add_message(
-                request, messages.SUCCESS, "Comment submitted and awaiting approval"
-            )
-
-    comment_form = CommentForm()
-
-    print("About to run the render")
+            messages.success(request, "Comment submitted and awaiting approval!")
+            return HttpResponseRedirect(reverse("post_detail", args=[post_id]))
+        else:
+            messages.error(request, "Error submitting comment.")
+    else:
+        comment_form = CommentForm()
 
     return render(
         request,
@@ -78,28 +80,61 @@ def post_detail(request, post_id):
     )
 
 
+# Create New Post View
 @login_required
 def create_post_page(request):
+    """View to create a new post."""
     if request.method == "POST":
-        print("POST request received")
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            print("form is valid")
             post = form.save(commit=False)
-            print(f"Category from form: {post.category}")  # Debug print
             post.author = request.user
-            if post.category is None:
-                print("No category assigned!")
-            else:
-                print(f"Category ID: {post.category.id}")
             post.save()
-            print(f"Post saved successfully: {post.title}")
+            messages.success(request, f"Post '{post.title}' created successfully!")
             return redirect("posts_list", category_id=post.category.id)
-            print(f"redirecting to posts_list with the category id: {post.category.id}")
         else:
-            print("form is invalid")
-            print(form.errors)
+            messages.error(request, "Error creating post. Please check the form.")
     else:
         form = PostForm()
 
     return render(request, "chat/create_post.html", {"form": form})
+
+
+def comment_edit(request, post_id, comment_id):
+    """
+    View to edit comments
+    """
+    if request.method == "POST":
+        post = get_object_or_404(
+            Post, pk=post_id
+        )  # Fetch the post associated with the comment
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.approved = False  # Re-mark as needing approval
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, "Comment Updated!")
+        else:
+            messages.add_message(request, messages.ERROR, "Error updating comment!")
+
+    return HttpResponseRedirect(reverse("post_detail", args=[post_id]))
+
+
+def comment_delete(request, post_id, comment_id):
+    """
+    view to delete comment
+    """
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, "Comment deleted!")
+    else:
+        messages.add_message(
+            request, messages.ERROR, "You can only delete your own comments!"
+        )
+
+    return HttpResponseRedirect(reverse("post_detail", args=[post_id]))

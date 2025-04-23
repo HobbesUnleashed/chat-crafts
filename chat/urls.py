@@ -10,4 +10,14 @@ urlpatterns = [
     path(
         "category/<int:category_id>/posts/", views.PostList.as_view(), name="posts_list"
     ),
+    path(
+        "posts/<int:post_id>/edit_comment/<int:comment_id>/",
+        views.comment_edit,
+        name="comment_edit",
+    ),
+    path(
+        "posts/<int:post_id>/delete_comment/<int:comment_id>/",
+        views.comment_delete,
+        name="comment_delete",
+    ),
 ]
