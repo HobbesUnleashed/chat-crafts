@@ -100,6 +100,23 @@ def create_post_page(request):
     return render(request, "chat/create_post.html", {"form": form})
 
 
+@login_required
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Ensure the logged-in user is the author of the post
+    if post.author != request.user:
+        messages.error(request, "You can only delete posts that you have authored.")
+        return redirect("post_detail", post_id=post.id)
+
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, "Post and all associated comments have been deleted.")
+        return redirect("home")
+
+    return render(request, "chat/delete_post.html", {"post": post})
+
+
 def comment_edit(request, post_id, comment_id):
     """
     View to edit comments

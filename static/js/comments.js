@@ -1,10 +1,10 @@
-// Select all edit buttons
+// Select comment edit buttons
 const editButtons = document.getElementsByClassName("btn-edit");
 const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("commentForm");
 const submitButton = document.getElementById("submitButton");
 
-// Initialize the delete modal
+// Initialize the comment delete modal
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
 const deleteButtons = document.getElementsByClassName("btn-delete");
 const deleteConfirm = document.getElementById("deleteConfirm");
@@ -15,7 +15,8 @@ const modalTitle = document.getElementById("commentModalLabel");
 const modalBody = document.getElementById("commentModalBody");
 const modalConfirmButton = document.getElementById("commentModalConfirm");
 
-// **EDIT BUTTON LOGIC**
+
+// **EDIT COMMENT BUTTON LOGIC**
 for (let button of editButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id"); // Get the comment's ID
@@ -42,7 +43,8 @@ for (let button of editButtons) {
     });
 }
 
-// **DELETE BUTTON LOGIC**
+
+// **DELETE COMMENT BUTTON LOGIC**
 for (let button of deleteButtons) {
     button.addEventListener("click", (e) => {
         let commentId = e.target.getAttribute("comment_id"); // Get the comment's ID
