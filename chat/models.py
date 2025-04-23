@@ -8,7 +8,7 @@ from cloudinary.models import CloudinaryField
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField()
-    image = CloudinaryField("image", default="no_image_kakml1")
+    image = CloudinaryField("image", default="no_image_fvpesk")
 
     class Meta:
         ordering = ["id"]
@@ -49,7 +49,7 @@ class Post(models.Model):
     materials = models.TextField()
     time_taken = models.IntegerField(help_text="Time taken in minutes")
     age = models.IntegerField(choices=AGE, default=0)
-    image = CloudinaryField("image", default="no_image_kakml1")
+    image = CloudinaryField("image", default="no_image_fvpesk")
     skill = models.IntegerField(choices=SKILL, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
