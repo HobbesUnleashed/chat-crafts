@@ -1,6 +1,6 @@
 from django.utils.html import strip_tags
 from django.contrib import admin
-from .models import Category, Post
+from .models import Category, Post, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -29,3 +29,6 @@ class PostAdmin(SummernoteModelAdmin):
     list_display = ("title", "category", "age", "skill", "created_on")
     search_fields = ["title", "category"]
     list_filter = ("category", "title")
+
+
+admin.site.register(Comment)

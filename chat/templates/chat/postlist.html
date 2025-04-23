@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="container">
-    <div class="row text-white">
+    <div class="row standard">
         <h2>Posts in {{ category.title }}</h2>
         {% for post in posts %}
         <div class="col-12 col-md-4 d-flex justify-content-center mt-3">
@@ -17,19 +17,17 @@
                 <div class="card-body text-center">
                     <div class="image-container">
                         <div class="image-flash">
+
                             <p class="cat_name">{{ post.title | safe }}</p>
+                            </a>
                         </div>
-                        {% if post.image %}
-                        <a href="{% url 'posts_list' post.id %}">
+                        <a href="{% url 'post_detail' post.id %}">
                             <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid fixed-size">
                         </a>
-                        {% else %}
-                        <a href="{% url 'posts_list' post.id %}">
-                            <img src="post-images/no_image.jpg" alt="Default Image" class="img-fluid">
-                        </a>
-                        {% endif %}
                         <hr>
-                        <p class="card-text text-muted h6">{{ post.content | safe }}</p>
+                        <a href="{% url 'post_detail' post.id %}">
+                            <p class="card-text text-muted h6">{{ post.content | safe }}</p>
+                        </a>
                     </div>
                 </div>
             </div>

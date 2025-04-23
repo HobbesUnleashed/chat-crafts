@@ -3,7 +3,8 @@ from django.views import generic
 from django.views.generic import ListView
 from .models import Category, Post
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, CommentForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -29,6 +30,52 @@ class PostList(ListView):
         context = super().get_context_data(**kwargs)
         context["category"] = get_object_or_404(Category, pk=self.kwargs["category_id"])
         return context
+
+
+def post_detail(request, post_id):
+    """
+    Display an individual :model: `blog.post`
+
+    **Context**
+
+    ``post``
+        An instance of :model: `blog.post`.
+
+    **Template:**
+
+    :template: `blog/post_detail.html`
+    """
+
+    post = get_object_or_404(Post, id=post_id)
+    comments = post.comments.all().order_by("-created_on")
+    comment_count = post.comments.filter(approved=True).count()
+
+    if request.method == "POST":
+        print("Received a POST request")
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS, "Comment submitted and awaiting approval"
+            )
+
+    comment_form = CommentForm()
+
+    print("About to run the render")
+
+    return render(
+        request,
+        "chat/post_detail.html",
+        {
+            "post": post,
+            "comments": comments,
+            "comment_count": comment_count,
+            "comment_form": comment_form,
+        },
+    )
 
 
 @login_required

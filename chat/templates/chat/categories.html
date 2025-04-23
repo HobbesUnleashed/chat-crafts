@@ -15,19 +15,17 @@
                 <div class="card-body text-center">
                     <div class="image-container">
                         <div class="image-flash">
-                            <p class="cat_name">{{ category.title | safe }}</p>
+                            <a href="{% url 'posts_list' category.id %}">
+                                <p class="cat_name">{{ category.title | safe }}</p>
+                            </a>
                         </div>
-                        {% if category.image %}
                         <a href="{% url 'posts_list' category.id %}">
                             <img src="{{ category.image.url }}" alt="{{ category.title }}" class="img-fluid fixed-size">
                         </a>
-                        {% else %}
-                        <a href="{% url 'posts_list' category.id %}">
-                            <img src="category-images/no_image.jpg" alt="Default Image" class="img-fluid">
-                        </a>
-                        {% endif %}
                         <hr>
-                        <p class="card-text text-muted h6">{{ category.description | safe }}</p>
+                        <a href="{% url 'posts_list' category.id %}">
+                            <p class="card-text text-muted h6">{{ category.description | safe }}</p>
+                        </a>
                     </div>
                 </div>
             </div>
