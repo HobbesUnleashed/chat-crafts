@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.html import strip_tags
+from django.utils.html import format_html
 from cloudinary.models import CloudinaryField
 
 
@@ -36,20 +36,20 @@ class Post(models.Model):
     )
 
     title = models.CharField(max_length=200, unique=True)
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="cat_id"
-    )
     content = models.TextField()
-    materials = models.TextField()
-    time_taken = models.IntegerField(help_text="Time taken in minutes")
-    age = models.IntegerField(choices=AGE, default=0)
-    image = CloudinaryField("image", default="no_image_kakml1")
     media_url = models.URLField(
         max_length=250,
         blank=True,
         null=True,
         help_text="Link to your Youtube/Facebook, etc",
     )
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="cat_id"
+    )
+    materials = models.TextField()
+    time_taken = models.IntegerField(help_text="Time taken in minutes")
+    age = models.IntegerField(choices=AGE, default=0)
+    image = CloudinaryField("image", default="no_image_kakml1")
     skill = models.IntegerField(choices=SKILL, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
@@ -61,6 +61,13 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} | written by {self.author}"
+
+    def get_media_url_as_hyperlink(self):
+        if self.media_url:
+            return format_html(
+                '<a href="{}" target="_blank">{}</a>', self.media_url, self.media_url
+            )
+        return "No Media URL was provided"
 
 
 class Comment(models.Model):

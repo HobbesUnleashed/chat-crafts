@@ -33,7 +33,8 @@
                     <strong>Suitable age: </strong>{{ post.get_age_display }} |
                     <strong>Skill level: </strong>{{ post.get_skill_display }}
                 </p>
-                <p class="post-subtitle"><strong>Media url: </strong>{{ post.media_url }}</p>
+                <p class="post-subtitle" id="postMediaURL"><strong>Media URL: </strong>
+                    {{ post.get_media_url_as_hyperlink|safe }}</p>
             </div>
         </div>
         <!-- Delete Post Button -->
