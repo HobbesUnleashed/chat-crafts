@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/449a7ae180.js" crossorigin="anonymous"></script>
+
     <!-- Google Fonts CSS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -72,7 +75,6 @@
                 <!-- Right Block Content -->
 
                 {% block create %}
-
                 {% endblock create %}
 
             </div>
@@ -82,30 +84,56 @@
     {% block content %}
     {% endblock content %}
 
-    <footer class="footer mt-auto py-3 banners">
+    <footer class="footer mt-auto py-3 banners col-xs-12">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6 d-flex justify-content-center flex-column align-items-center">
+                <div class="col-4 d-flex justify-content-center flex-column align-items-center">
                     {% if user.is_authenticated %}
                     <p class="m-0">You are logged in as "{{ user }}"</p>
                     {% else %}
                     <p class="m-0">You are not logged in</p>
                     {% endif %}
                 </div>
-                <div class="col-6 d-flex justify-content-center flex-column align-items-center">
+                <div class="col-4 d-flex justify-content-center flex-column align-items-center">
+                    <p class="m-0">Created by Shay Leacy</p>
+                </div>
+                <div class="col-4 d-flex justify-content-center flex-column align-items-center">
                     <p class="m-0 text-center">&#169; Copyright of Creative Crafts with Kel 2025</p>
-                    <p class="m-0 text-center">Follow us:
-                        <i class="fab fa-facebook-square ms-2"></i>
-                        <i class="fab fa-twitter-square ms-3"></i>
-                        <i class="fab fa-instagram-square ms-3"></i>
-                        <i class="fab fa-youtube-square ms-3"></i>
-                    </p>
+                    <ul class="list-inline social-links">
+
+                        <li class="list-inline-item">Follow us:</li>
+                        <li class="list-inline-item facebook mt-3">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                <span class="sr-only">Facebook</span>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item instagram mr-4">
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                                <span class="sr-only">Instagram</span>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item twitter mr-4">
+                            <a href="https://www.twitter.com" target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <span class="sr-only">Twitter</span>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item youtube mr-4">
+                            <a href="https://www.youtube.com" target="_blank">
+                                <i class="fa fa-youtube" aria-hidden="true"></i>
+                                <span class="sr-only">Youtube</span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
         </div>
-    </footer>
-    </div>
-
     </footer>
 
     <!-- Bootstrap JS -->

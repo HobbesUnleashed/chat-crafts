@@ -26,7 +26,7 @@
 
 <div class="container">
     <div class="row standard">
-        <h2>Posts in {{ category.title }}</h2>
+        <h2>Posts in {{ category }}</h2>
         {% for post in posts %}
         <div class="col-12 col-md-4 d-flex justify-content-center mt-3">
             <div class="card tiles" style="width: 100%;">
@@ -42,7 +42,7 @@
                         </a>
                         <hr>
                         <a href="{% url 'post_detail' post.id %}">
-                            <p class="card-text h6 tile_desc">{{ post.content | safe }}</p>
+                            <p class="card-text h6 tile_desc">{{ post.blurb | safe }}</p>
                         </a>
                     </div>
                 </div>

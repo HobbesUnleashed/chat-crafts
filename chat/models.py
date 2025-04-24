@@ -55,6 +55,9 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="craft_posts"
     )
+    blurb = models.CharField(
+        max_length=80, unique=False, default="A piece of crafting excellence"
+    )
 
     class Meta:
         ordering = ["-created_on"]

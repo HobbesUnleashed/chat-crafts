@@ -119,6 +119,21 @@
     border-radius: 25%;
 }
 
+.btn-create-rev {
+    background-color: #2b4162;
+    color: #f5f0f6;
+    border: solid 1px #f5f0f6;
+    border-radius: 15px;
+    padding: 4px 8px;
+}
+
+.btn-create-rev:hover {
+    background-color: #f5f0f6;
+    color: #2b4162;
+    border: solid 1px #2b4162;
+    border-radius: 25%;
+}
+
 .btn-edit {
     background-color: #FFC60A;
     color: black;
@@ -150,6 +165,21 @@
     margin: auto;
 } 
 
+/* Page links for pagination */
+.page-link {
+    border: 1px solid #f5f0f6;
+    border-radius: 15px;
+    background-color: #B370B0;
+    color: #f5f0f6;
+    font-size: 110%;
+}
+
+.page-link:hover {
+    border: 1px solid #b370b0;
+    border-radius: 25%;
+    background-color: #f5f0f6;
+    color: #b370b0;
+}
 
 /* Fonts */
 .tile_name {
@@ -225,4 +255,50 @@ label[for="id_body"] {
 /* Modal */
 .modal-body, .modal-title {
     color: black;
+}
+
+/* Social links */
+.social-links li a i {
+    width: 30px;
+    height: 30px;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 7px;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    background: #f5f0f6;
+    transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.social-links .youtube a i:hover {
+    background-color: #FF0000;
+    color: rgba(0,0,0,.75);
+}
+
+.social-links .facebook a i:hover {
+    background-color: #0865FF;
+    color: rgba(0,0,0,.75);
+}
+
+.social-links .instagram a i:hover {
+    background-image: linear-gradient(45deg, #FCA008, #FA315E, #F21DC7);
+    color: rgba(0,0,0,.75);
+}
+
+.social-links .twitter a i:hover {
+    background-color: #1DA1F2;
+    color: rgba(0,0,0,.75);
+}
+
+.image-container {
+    height: 34vh;
+}
+
+.img-fluid {
+    height: 25vh;
 }

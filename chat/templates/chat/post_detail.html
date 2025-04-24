@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block create %}
 {% if current_page == "home" or current_page == "posts_list" %}
@@ -20,10 +21,10 @@
     </span>
 </div>
 {% endif %}
+
 {% endblock create %}
 
 {% block content %}
-{% load crispy_forms_tags %}
 
 <div class="masthead">
     <div class="container">
@@ -75,38 +76,40 @@
                 Delete Post
             </button>
         </div>
-        {% endif %}
+    </div>
+    {% endif %}
 
-        <!-- Delete Confirmation Modal -->
-        <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deletePostModalLabel">Delete Post</h5>
-                        <button type="button" class="btn btn-create ms-auto" data-bs-dismiss="modal"
-                            aria-label="Close">X</button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this post? This action cannot be undone, and all comments
-                        associated with this post will also be deleted.
-                    </div>
-                    <div class="modal-footer">
-                        <!-- Cancel button -->
-                        <button type="button" class="btn btn-create" data-bs-dismiss="modal">Cancel</button>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletePostModalLabel">Delete Post</h5>
+                    <button type="button" class="btn btn-create ms-auto" data-bs-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this post? This action cannot be undone, and all comments
+                    associated with this post will also be deleted.
+                </div>
+                <div class="modal-footer">
+                    <!-- Cancel button -->
+                    <button type="button" class="btn btn-create" data-bs-dismiss="modal">Cancel</button>
 
-                        <!-- Form for deleting the post -->
-                        <form method="POST" action="{% url 'delete_post' post.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-remove">Delete</button>
-                        </form>
-                    </div>
+                    <!-- Form for deleting the post -->
+                    <form method="POST" action="{% url 'delete_post' post.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-remove">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <br>
+<br>
+<div class="container">
     <div class="row">
         <!-- Comments header Full screen-->
         <div class="col-md-8 main-bg">
@@ -159,52 +162,53 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Edit comment confirmation modal -->
-    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title" id="commentModalLabel"></h5>
-                    <button type="button" class="btn btn-create" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body" id="commentModalBody">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-create" data-bs-dismiss="modal">Close</button>
-                    <button id="commentModalConfirm" type="button" class="btn btn-accept">Update</button>
-                </div>
+<!-- Edit comment confirmation modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title" id="commentModalLabel"></h5>
+                <button type="button" class="btn btn-create" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body" id="commentModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn-create" data-bs-dismiss="modal">Close</button>
+                <button id="commentModalConfirm" type="button" class="btn btn-accept">Update</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Delete comment confirmation modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
-                    <button type="button" class="btn-create" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete your comment?<br>
-                    This action cannot be undone later!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-create" data-bs-dismiss="modal">Close</button>
-                    <a id="deleteConfirm" href="#" class="btn
-              btn-remove">Delete</a>
-                </div>
+<!-- Delete comment confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+                <button type="button" class="btn-create" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your comment?<br>
+                This action cannot be undone later!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-create" data-bs-dismiss="modal">Close</button>
+                <a id="deleteConfirm" href="#" class="btn
+      btn-remove">Delete</a>
             </div>
         </div>
     </div>
+</div>
 
-    {% endblock content %}
 
-    {% block extras %}
-    <script>
-        const csrf_token = "{{ csrf_token }}";
-        const post_id = "{{ post.id }}";
-    </script>
-    <script src="{% static 'js/comments.js' %}"></script>
-    {% endblock extras %}
+{% endblock content %}
+
+{% block extras %}
+<script>
+    const csrf_token = "{{ csrf_token }}";
+    const post_id = "{{ post.id }}";
+</script>
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock extras %}
