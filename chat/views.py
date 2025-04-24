@@ -14,6 +14,11 @@ class Categories(ListView):
     template_name = "chat/categories.html"
     context_object_name = "categories"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_page"] = "home"
+        return context
+
 
 # Post List View (Filtered by Category)
 class PostList(ListView):
@@ -34,6 +39,11 @@ class PostList(ListView):
         context["category"] = get_object_or_404(
             Category, pk=self.kwargs.get("category_id")
         )
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["current_page"] = "posts_list"
         return context
 
 
@@ -155,3 +165,8 @@ def comment_delete(request, post_id, comment_id):
         )
 
     return HttpResponseRedirect(reverse("post_detail", args=[post_id]))
+
+
+def render_page(request, page_name):
+    context = {"current_page": page_name}
+    return render(request, f"{page_name}.html", context)

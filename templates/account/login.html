@@ -15,7 +15,7 @@
 
       <p>{% blocktrans %}Welcome back to the code|star blog. To leave a comment or like a post, please log in. If
         you
-        have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a>
+        have not created an account yet, then <a class="link" href="{{ signup_url }}"><strong>Register</strong></a>
         first.{% endblocktrans %}</p>
     </div>
   </div>
@@ -27,7 +27,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
+        <button class="btn btn-accept right" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>
   </div>

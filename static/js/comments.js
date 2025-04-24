@@ -31,7 +31,7 @@ for (let button of editButtons) {
             </form>
         `;
         modalConfirmButton.innerText = "Update";
-        modalConfirmButton.className = "btn btn-primary";
+        modalConfirmButton.className = "btn btn-accept";
 
         // Attach the submit event to the button
         modalConfirmButton.onclick = () => {

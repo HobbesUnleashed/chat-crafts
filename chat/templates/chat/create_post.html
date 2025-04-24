@@ -1,13 +1,91 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!-- chat/templates/create_post.html -->
-<h1>This is create_post.html</h1>
+{% block create %}
+{% if current_page == "home" or current_page == "posts_list" %}
+<div class="text-center mx-auto">
+    <span class="navbar-text text-center">
+        <p class="m-0">Your one-stop shop for all craft discussions</p>
+    </span>
+</div>
+<div class="d-flex justify-content-end">
+    <span>
+        <a href="{% url 'create_post_page' %}" class="btn btn-create">Create New Post</a>
+    </span>
+</div>
+{% else %}
+<div class="text-end">
+    <span class="navbar-text text-center">
+        <p class="m-0">Your one-stop shop for all craft discussions</p>
+    </span>
+</div>
+{% endif %}
+{% endblock create %}
 
 {% block content %}
+<!-- chat/templates/create_post.html -->
 <form method="post" action="{% url 'create_post_page' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Submit</button>
+
+    <div class="container m-cust">
+        <div class="row">
+            <!-- Title and Category -->
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Content and Materials -->
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.content.label_tag }}
+                {{ form.content }}
+            </div>
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.materials.label_tag }}
+                {{ form.materials }}
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Age, Skill, and Image -->
+            <div class="col-md-4 mb-3 text-center">
+                {{ form.age.label_tag }}
+                {{ form.age }}
+            </div>
+            <div class="col-md-4 mb-3 text-center">
+                {{ form.skill.label_tag }}
+                {{ form.skill }}
+            </div>
+            <div class="col-md-4 mb-3 text-center">
+                {{ form.image.label_tag }}
+                {{ form.image }}
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Time Taken and Media URL -->
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.time_taken.label_tag }}
+                {{ form.time_taken }}
+            </div>
+            <div class="col-md-6 mb-3 text-center">
+                {{ form.media_url.label_tag }}
+                {{ form.media_url }}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row">
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-accept">Submit</button>
 </form>
+</div>
+</div>
+</div>
 {% endblock %}

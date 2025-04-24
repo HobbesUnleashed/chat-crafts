@@ -1,23 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block create %}
-<span class="text-center mr-4">
-    <a href="{% url 'create_post_page' %}" class="btn btn-primary">Create New Post</a>
-</span>
-{% endblock %}
+{% if current_page == "home" or current_page == "posts_list" %}
+<div class="text-center mx-auto">
+    <span class="navbar-text text-center">
+        <p class="m-0">Your one-stop shop for all craft discussions</p>
+    </span>
+</div>
+<div class="d-flex justify-content-end">
+    <span>
+        <a href="{% url 'create_post_page' %}" class="btn btn-create">Create New Post</a>
+    </span>
+</div>
+{% else %}
+<div class="text-end">
+    <span class="navbar-text text-center">
+        <p class="m-0">Your one-stop shop for all craft discussions</p>
+    </span>
+</div>
+{% endif %}
+{% endblock create %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         {% for category in object_list %}
-        <div class="col-12 col-md-4 d-flex justify-content-center mt-3">
-            <div class="card" style="width: 100%;">
+        <div class="col-12 col-md-4 d-flex justify-content-center mt-5 mb-3">
+            <div class="card tiles" style="width: 100%;">
                 <div class="card-body text-center">
                     <div class="image-container">
                         <div class="image-flash">
                             <a href="{% url 'posts_list' category.id %}">
-                                <p class="cat_name">{{ category.title | safe }}</p>
+                                <p class="tile_name">{{ category.title | safe }}</p>
                             </a>
                         </div>
                         <a href="{% url 'posts_list' category.id %}">
@@ -25,7 +39,7 @@
                         </a>
                         <hr>
                         <a href="{% url 'posts_list' category.id %}">
-                            <p class="card-text text-muted h6">{{ category.description | safe }}</p>
+                            <p class="card-text h6 tile_desc">{{ category.description | safe }}</p>
                         </a>
                     </div>
                 </div>

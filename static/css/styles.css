@@ -1,8 +1,20 @@
-/* Colors */
-.standard {
-    color: #000;
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Gruppo&family=Playwrite+AU+SA:wght@100..400&display=swap');
+
+.faded {
+    opacity: 0.6;
+    color: black;
 }
 
+.approved {
+    color: black;
+}
+
+/* Navbar */
+.brand {
+    font-size: 180%;
+}
+
+/* Colors */
 .poppy {
     color: #ed4e60;
 }
@@ -24,17 +36,193 @@
     color: #0081bc;
 }
 
-.white {
-    color: #fff;
+.tiles {
+    background-color: #f5f0f6;
+    color: black;
+}
+
+ a, a:hover {
+    text-decoration: none;
+    color: black;
 }
 
 .main-bg {
-    background-color: #fff;
+    background-color: #385f71;
+    color: #f5f0f6;
+}
+
+.banners {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2b4162;
+    color: #f5f0f6;
+}
+
+.banners .navbar-brand, 
+.banners .nav-link, 
+.banners .navbar-text {
+    color: #f5f0f6; /* Ensures all text within the navbar uses the custom color */
+}
+
+.banners .nav-link:hover {
+    color: #ed4e60; /* Add hover effect for links */
+}
+
+.btn-accept, .btn-remove, .btn-create, .btn-edit {
+    all: unset;
+    display: inline-block;
+}
+
+.btn-accept {
+    background-color: #7dde92;
+    border: solid 1px black;
+    border-radius: 15px;
+    color: black;
+    padding: 4px 8px;
+}
+
+.btn-accept:hover {
+    background-color: #f5f0f6;
+    border: solid 1px #7dde92;
+    border-radius: 25%;
+    color: black;
+}
+
+.btn-remove {
+    background-color: #A63A50;
+    color: #f5f0f6;
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 4px 8px;
+}
+
+.btn-remove:hover {
+    background-color: #f5f0f6;
+    border: solid 1px #A63A50;
+    border-radius: 25%;
+    color: black;
+}
+
+.btn-create {
+    background-color: #f5f0f6;
+    color: #2b4162;
+    border: solid 1px #2b4162;
+    border-radius: 15px;
+    padding: 4px 8px;
+}
+
+.btn-create:hover {
+    background-color: #2b4162;
+    color: #f5f0f6;
+    border: solid 1px #f5f0f6;
+    border-radius: 25%;
+}
+
+.btn-edit {
+    background-color: #FFC60A;
+    color: black;
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 4px 8px;
+}
+
+.btn-edit:hover {
+    background-color: #f5f0f6;
+    color: black;
+    border: solid 1px #FFC60A;
+    border-radius: 25%;
+}
+
+.link {
+    color: #7dde92;
+}
+
+.link:hover {
+    color: #f5f0f6;
 }
 
 /* Image size for tiles */
 .fixed-size {
     width: 75%;
-    height:250px;
-    object-fit: cover;
+    height: 33vh;
+    object-fit: contain;
+    margin: auto;
 } 
+
+
+/* Fonts */
+.tile_name {
+    font-family: "Playwrite AU SA", cursive;
+    font-size: 110%;
+}
+
+.tile_desc {
+    font-family: "Gruppo", sans-serif;
+}
+
+/* Margins */
+.m-cust {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+/* Views */
+.masthead {
+    height: 25vh; /* Set the height of the masthead section */
+}
+
+.masthead-image a {
+    display: flex;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center; /* Vertically center the image */
+    height: 25vh; /* Fill the full container height */
+}
+
+.masthead img {
+    height: 25vh;
+}
+
+.masthead-small {
+    height: 20vh;
+}
+
+.masthead-image-small a {
+    display: flex;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center; /* Vertically center the image */
+    height: 20vh; /* Fill the full container height */
+}
+
+.masthead-small img {
+    height: 20vh;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Optionally horizontally center */
+    height: 100%; /* Ensure it fills the card */
+}
+
+textarea[name="body"] {
+    width: 100%;
+    height: 14vh;
+    resize: none;
+    overflow-y: auto;
+}
+
+label[for="id_body"] {
+    display: none; /* Hides the label for the 'body' field */
+}
+
+.commenthead{
+        height: 25vh; /* Set the height of the masthead section */
+        overflow-y: auto;
+}
+
+/* Modal */
+.modal-body, .modal-title {
+    color: black;
+}
