@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Gruppo&family=Playwrite+AU+SA:wght@100..400&display=swap');
 
 body {
+    font-family: "Exo", sans-serif;
     background-color: #385f71;
     color: #f5f0f6;
 }
@@ -179,6 +180,11 @@ body {
     object-fit: contain;
     margin: auto;
 } 
+
+.full-size {
+    width: 100%;
+    object-fit: contain; 
+}
 
 /* Page links for pagination */
 .page-link {
