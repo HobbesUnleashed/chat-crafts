@@ -81,6 +81,21 @@
         </div>
     </nav>
 
+    <!-- displaying Django messages -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 justify-content-start">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible
+      fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-create-rev" data-bs-dismiss="alert" aria-label="Close">X</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
     {% block content %}
     {% endblock content %}
 

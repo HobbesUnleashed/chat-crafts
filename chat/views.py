@@ -174,7 +174,12 @@ def edit_post(request, pk):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Post updated successfully!")
             return redirect("post_detail", post_id=post.id)
+        else:
+            messages.error(
+                request, "There was an error updating the post - please try again"
+            )
     else:
         form = PostForm(instance=post)
     return render(request, "chat/post_edit.html", {"form": form, "post": post})
