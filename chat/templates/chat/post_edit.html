@@ -1,37 +1,14 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block create %}
-{% if current_page == "home" or current_page == "posts_list" %}
-<div class="text-center mx-auto">
-    <span class="navbar-text text-center">
-        <p class="m-0">Your one-stop shop for all craft discussions</p>
-    </span>
-</div>
-<div class="d-flex justify-content-end">
-    <span>
-        <a href="{% url 'create_post_page' %}" class="btn btn-create">Create New Post</a>
-    </span>
-</div>
-{% else %}
-<div class="text-end">
-    <span class="navbar-text text-center">
-        <p class="m-0">Your one-stop shop for all craft discussions</p>
-    </span>
-</div>
-{% endif %}
-{% endblock create %}
+{% extends 'base.html' %}
 
 {% block content %}
-<!-- chat/templates/create_post.html -->
 <div class="container mt-5">
-    <h2 class="mb-4">Create a Post</h2>
-    <form method="post" action="{% url 'create_post_page' %}" enctype="multipart/form-data">
+    <h2 class="mb-4">Edit Post</h2>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="container m-cust">
+            <!-- Title and Category -->
             <div class="row">
-                <!-- Title and Category -->
                 <div class="col-md-6 mb-3 text-center">
                     {{ form.title.label_tag }}
                     {{ form.title }}
@@ -42,8 +19,8 @@
                 </div>
             </div>
 
+            <!-- Content and Materials -->
             <div class="row">
-                <!-- Content and Materials -->
                 <div class="col-md-6 mb-3 text-center">
                     {{ form.content.label_tag }}
                     {{ form.content }}
@@ -54,8 +31,8 @@
                 </div>
             </div>
 
+            <!-- Age, Skill, and Image -->
             <div class="row">
-                <!-- Age, Skill, and Image -->
                 <div class="col-md-4 mb-3 text-center">
                     {{ form.age.label_tag }}
                     {{ form.age }}
@@ -70,8 +47,8 @@
                 </div>
             </div>
 
+            <!-- Time Taken and Media URL -->
             <div class="row">
-                <!-- Time Taken and Media URL -->
                 <div class="col-md-6 mb-3 text-center">
                     {{ form.time_taken.label_tag }}
                     {{ form.time_taken }}
@@ -82,16 +59,16 @@
                 </div>
             </div>
 
+            <!-- Buttons -->
             <div class="row">
                 <div class="col-12 d-flex justify-content-center mt-4">
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn btn-accept me-2">Submit</button>
+                    <!-- Save Changes Button -->
+                    <button type="submit" class="btn btn-accept me-2">Update Changes</button>
                     <!-- Cancel Button -->
-                    <a href="{% url 'home' %}" class="btn btn-create-rev">Cancel</a>
+                    <a href="{% url 'post_detail' post_id=post.id %}" class="btn btn-create-rev">Cancel</a>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-{% endblock %}
+{% endblock content %}

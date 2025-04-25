@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Gruppo&family=Playwrite+AU+SA:wght@100..400&display=swap');
 
+body {
+    background-color: #385f71;
+    color: #f5f0f6;
+}
+
+.background-image {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('../images/background.jpg');
+    background-size: cover;
+}
+
+.opaque {
+    background-color: rgba(255, 255, 255, .3);
+    display: flex;
+}
+
+.full-opac {
+    opacity: 1;
+}
+
 .faded {
     opacity: 0.6;
     color: black;
@@ -44,11 +64,6 @@
  a, a:hover {
     text-decoration: none;
     color: black;
-}
-
-.main-bg {
-    background-color: #385f71;
-    color: #f5f0f6;
 }
 
 .banners {

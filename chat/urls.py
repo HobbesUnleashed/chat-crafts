@@ -1,7 +1,9 @@
 from . import views
 from django.urls import path
 from django.conf import settings
-from django.conf.urls.static import static
+from .views import edit_post
+from chat.views import custom_404
+
 
 urlpatterns = [
     path("", views.Categories.as_view(), name="home"),
@@ -21,4 +23,13 @@ urlpatterns = [
         name="comment_delete",
     ),
     path("posts/<int:post_id>/delete/", views.delete_post, name="delete_post"),
+    path("post/<int:pk>/edit/", edit_post, name="post_edit"),
+    path(
+        "test-404/",
+        lambda request: custom_404(request, Exception("Test")),
+        name="test_404",
+    ),
 ]
+
+handler404 = "chat.views.custom_404"
+handler500 = "chat.views.custom_500"

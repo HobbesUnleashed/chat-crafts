@@ -14,7 +14,7 @@ class Category(models.Model):
         ordering = ["id"]
 
     def __str__(self):
-        return f"{ self.title }"
+        return self.title
 
 
 class Post(models.Model):
@@ -58,6 +58,7 @@ class Post(models.Model):
     blurb = models.CharField(
         max_length=80, unique=False, default="A piece of crafting excellence"
     )
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_on"]

@@ -31,7 +31,7 @@ class PostList(ListView):
         """Filters posts by the chosen category."""
         category_id = self.kwargs.get("category_id")
         category = get_object_or_404(Category, pk=category_id)
-        return Post.objects.filter(category=category).order_by("-created_on")
+        return Post.objects.filter(category=category).order_by("title")
 
     def get_context_data(self, **kwargs):
         """Adds category data to context."""
@@ -39,10 +39,6 @@ class PostList(ListView):
         context["category"] = get_object_or_404(
             Category, pk=self.kwargs.get("category_id")
         )
-        return context
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
         context["current_page"] = "posts_list"
         return context
 
@@ -170,3 +166,23 @@ def comment_delete(request, post_id, comment_id):
 def render_page(request, page_name):
     context = {"current_page": page_name}
     return render(request, f"{page_name}.html", context)
+
+
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect("post_detail", post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+    return render(request, "chat/post_edit.html", {"form": form, "post": post})
+
+
+def custom_404(request, exception):
+    return render(request, "chat/404.html", status=404)
+
+
+def custom_500(request):
+    return render(request, "chat/500.html", status=500)
