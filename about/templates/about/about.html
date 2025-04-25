@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block create %}
 {% if current_page == "home" or current_page == "posts_list" %}
@@ -42,6 +43,27 @@
         </div>
     </div>
 </div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6 my-5">
+        <h2>Approach me</h2>
+        <p>I want to make this site somewhere you want to visit and post, tell your friends about and be excited to
+            share your creations.
+            So if you feel there is something missing from the site, whether you want another Category, sub-categories -
+            whatever.
+            If you need or want from this site, let me know and we can see if it is possible and appropriate for us
+            through a discussion.
+            Let's build our community together!
+        </p>
+
+        <form method="post">
+            {{ approach_form | crispy }}
+            {% csrf_token %}
+            <button class="btn btn-accept" type="submit">Send to Kel</button>
+        </form>
+    </div>
+</div>
+
 
 
 {% endblock content %}
