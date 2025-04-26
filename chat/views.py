@@ -13,6 +13,7 @@ class Categories(ListView):
     model = Category
     template_name = "chat/categories.html"
     context_object_name = "categories"
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

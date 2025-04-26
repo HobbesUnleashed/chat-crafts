@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 import sys
 import dj_database_url
 
@@ -149,6 +150,11 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: "accept",
+    messages.ERROR: "remove",
+}
 
 
 # Static files (CSS, JavaScript, Images)

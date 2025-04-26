@@ -79,8 +79,6 @@
                     {% endif %}
                 </ul>
 
-                <!-- Right Block Content -->
-
                 {% block create %}
                 {% endblock create %}
 
@@ -91,20 +89,40 @@
     <!-- displaying Django messages -->
     <div class="container">
         <div class="row">
-            <div class="col-md-8 justify-content-start">
-                {% for message in messages %}
-                <div class="alert {{ message.tags }} alert-dismissible
-      fade show" id="msg" role="alert">
-                    {{ message | safe }}
-                    <button type="button" class="btn-create-rev" data-bs-dismiss="alert" aria-label="Close">X</button>
-                </div>
-                {% endfor %}
+            <div class="col-md-4 d-flex flex-column justify-content-start">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="btn {{ message.tags }}" onclick="this.remove()">{{ message }}</li>
+                    {% endfor %}
+                </ul>
             </div>
+            {% endif %}
         </div>
     </div>
+    </div>
+
 
     {% block content %}
     {% endblock content %}
+
+    {% block paginate %}
+    <div class="mb-5"></div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; Previous</a>
+            </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next
+                    &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    {% endblock paginate %}
 
     <footer class="footer mt-auto py-3 banners col-xs-12">
         <div class="container-fluid">
